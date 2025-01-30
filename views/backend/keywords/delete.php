@@ -2,37 +2,42 @@
 include '../../../header.php';
 
 if (isset($_GET['numMotCle'])) {
-    $numMotCle = intval($_GET['numMotCle']); // Sécurisation de l'entrée
+    $numMotCle = $_GET['numMotCle'];
+    $libMotCle = sql_select("MOTCLE", "libMotCle", "numMotCle = $numMotCle")[0]['libMotCle'];
 
-    // Récupération du libellé du mot-clé
-    $result = sql_select("motcle", "libMotCle", "numMotCle = $numMotCle");
-    $libMotCle = !empty($result) ? $result[0]['libMotCle'] : null;
-
-    // Vérification si le mot-clé est relié à un article
-    $motclearticle = sql_select("motclearticle", "COUNT(*) as count", "numMotCle = $numMotCle")[0]['count'] > 0;
+    // Vérifie si le statut est utilisé par au moins un membre
+    $countnumMotCle = sql_select("MOTCLEARTICLE", "COUNT(*) AS total", "numMotCle = $numMotCle")[0]['total'];
+    $ifnumMotCleUsed = $countnumMotCle > 0; // true si au moins un membre a ce statut
 }
 ?>
 
-<!-- Bootstrap form to delete a keyword -->
+<!-- Bootstrap form to delete a statut -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Suppression Thématiques</h1>
+            <h1>Suppression mot clé</h1>
+            <?php if ($ifnumMotCleUsed): ?>
+
+
+                ⚠ Impossible de supprimer ce mot clé car il est utilisé
+
+            <?php endif; ?>
         </div>
         <div class="col-md-12">
             <form action="<?php echo ROOT_URL . '/api/keywords/delete.php' ?>" method="post">
                 <div class="form-group">
-                    <label for="libMotCle">Nom de la thématique</label>
+                    <label for="libMotCle">Nom du mot clé</label>
                     <input id="numMotCle" name="numMotCle" class="form-control" style="display: none" type="text"
-                        value="<?php echo htmlspecialchars($numMotCle); ?>" readonly />
+                        value="<?php echo ($numMotCle); ?>" readonly />
                     <input id="libMotCle" name="libMotCle" class="form-control" type="text"
-                        value="<?php echo htmlspecialchars($libMotCle); ?>" readonly disabled />
+                        value="<?php echo ($libMotCle); ?>" readonly disabled />
                 </div>
                 <br />
                 <div class="form-group mt-2">
-                    <a href="list.php" class="btn btn-primary">Liste</a>
-                    <button type="submit" class="btn btn-danger" <?php echo ($isLinked ? 'disabled' : ''); ?>>Confirmer
-                        suppression</button>
+                    <a href="list.php" class="btn btn-primary">Retour à la liste</a>
+                    <button type="submit" class="btn btn-danger" <?php echo ($ifnumMotCleUsed ? 'disabled' : ''); ?>>
+                        Confirmer delete ?
+                    </button>
                 </div>
             </form>
         </div>

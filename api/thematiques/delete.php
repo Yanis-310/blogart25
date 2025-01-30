@@ -1,10 +1,23 @@
 <?php
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once '../../functions/ctrlSaisies.php';
 
-$numStat = ctrlSaisies($_POST['numThem']);
+$numThem = ctrlSaisies($_POST['numThem']);
 
-sql_delete('thematique', "numThem = $numThem");
+// Vérifie si le statut est utilisé
+$countnumThem = sql_select("ARTICLE", "COUNT(*) AS total", "numThem = $numThem")[0]['total'];
 
+if ($countnumThemt > 0) {
+    // Redirection avec message d'erreur
+    header('Location: ../../views/backend/thematiques/list.php?error=used');
+    exit;
+}
 
-header('Location: ../../views/backend/thematiques/list.php');
+// Si le statut n'est pas utilisé, suppression
+sql_delete('THEMATIQUE', "numThem = $numThem");
+
+header('Location: ../../views/backend/thematiques/list.php?success=deleted');
+exit;
+
+?>
