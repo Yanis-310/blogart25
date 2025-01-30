@@ -6,7 +6,9 @@ include '../../header.php';
 <!-- Bootstrap admin dashboard template -->
 <div>
     <hr class="my-3">
-    <div style="color: black; font-size: 30px; font-family: Montserrat; font-weight: 400; padding-left: 3rem ;word-wrap: break-word">Liens permettant d'administrer le Blog d'Articles</div>    
+    <div
+        style="color: black; font-size: 30px; font-family: Montserrat; font-weight: 400; padding-left: 3rem ;word-wrap: break-word">
+        Liens permettant d'administrer le Blog d'Articles</div>
     <hr class="my-3">
     <div class="container">
         <div class="row">
@@ -58,10 +60,11 @@ include '../../header.php';
                         <tr>
                             <td>Thématiques</td>
                             <td>
-                                <a href="/views/backend/thematiques/list.php" class="btn btn-primary disabled">List</a>
-                                <a href="/views/backend/thematiques/create.php" class="btn btn-success disabled">Create</a>
+                                <a href="/views/backend/thematiques/list.php" class="btn btn-primary">List</a>
+                                <a href="/views/backend/thematiques/create.php" class="btn btn-success ">Create</a>
                                 <a href="/views/backend/thematiques/edit.php" class="btn btn-warning disabled">Edit</a>
-                                <a href="/views/backend/thematiques/delete.php" class="btn btn-danger disabled">Delete</a>
+                                <a href="/views/backend/thematiques/delete.php"
+                                    class="btn btn-danger disabled">Delete</a>
                             </td>
                             <td></td>
                         </tr>
@@ -73,7 +76,8 @@ include '../../header.php';
                                 <a href="/views/backend/comments/edit.php" class="btn btn-warning disabled">Edit</a>
                                 <a href="/views/backend/comments/delete.php" class="btn btn-danger disabled">Delete</a>
                             </td>
-                            <td>Gestion côté front et côté back, modération. Utilisation de mise en forme (emojies...)</td>
+                            <td>Gestion côté front et côté back, modération. Utilisation de mise en forme (emojies...)
+                            </td>
                         </tr>
                         <tr>
                             <td>Likes</td>
@@ -88,8 +92,8 @@ include '../../header.php';
                         <tr>
                             <td>Mot-clés</td>
                             <td>
-                                <a href="/views/backend/keywords/list.php" class="btn btn-primary disabled">List</a>
-                                <a href="/views/backend/keywords/create.php" class="btn btn-success disabled">Create</a>
+                                <a href="/views/backend/keywords/list.php" class="btn btn-primary ">List</a>
+                                <a href="/views/backend/keywords/create.php" class="btn btn-success ">Create</a>
                                 <a href="/views/backend/keywords/edit.php" class="btn btn-warning disabled">Edit</a>
                                 <a href="/views/backend/keywords/delete.php" class="btn btn-danger disabled">Delete</a>
                             </td>
