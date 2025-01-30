@@ -2,31 +2,37 @@
 include '../../../header.php';
 
 if (isset($_GET['numMotCle'])) {
-    $numMotCle = $_GET['numMotCle'];
-    $libMotCle = sql_select("motcle", "libMotCle", "numMotCle = $numThem")[0]['libMotCle'];
+    $numMotCle = intval($_GET['numMotCle']); // Sécurisation de l'entrée
+
+    // Récupération du libellé du mot-clé
+    $result = sql_select("motcle", "libMotCle", "numMotCle = $numMotCle");
+    $libMotCle = !empty($result) ? $result[0]['libMotCle'] : null;
+
+    // Vérification si le mot-clé est relié à un article
+    $motclearticle = sql_select("motclearticle", "COUNT(*) as count", "numMotCle = $numMotCle")[0]['count'] > 0;
 }
 ?>
 
-<!-- Bootstrap form to create a new statut -->
+<!-- Bootstrap form to delete a keyword -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>Suppression Thématiques</h1>
         </div>
         <div class="col-md-12">
-            <!-- Form to create a new statut -->
             <form action="<?php echo ROOT_URL . '/api/keywords/delete.php' ?>" method="post">
                 <div class="form-group">
                     <label for="libMotCle">Nom de la thématique</label>
                     <input id="numMotCle" name="numMotCle" class="form-control" style="display: none" type="text"
-                        value="<?php echo ($numMotCle); ?>" readonly="readonly" />
+                        value="<?php echo htmlspecialchars($numMotCle); ?>" readonly />
                     <input id="libMotCle" name="libMotCle" class="form-control" type="text"
-                        value="<?php echo ($libMotCle); ?>" readonly="readonly" disabled />
+                        value="<?php echo htmlspecialchars($libMotCle); ?>" readonly disabled />
                 </div>
                 <br />
                 <div class="form-group mt-2">
-                    <a href="list.php" class="btn btn-primary">List</a>
-                    <button type="submit" class="btn btn-danger" disabled>Confirmer delete ?</button>
+                    <a href="list.php" class="btn btn-primary">Liste</a>
+                    <button type="submit" class="btn btn-danger" <?php echo ($isLinked ? 'disabled' : ''); ?>>Confirmer
+                        suppression</button>
                 </div>
             </form>
         </div>
