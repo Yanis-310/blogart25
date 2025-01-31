@@ -5,6 +5,16 @@ if (isset($_GET['numArt'])) {
     $numArt = $_GET['numArt'];
     $article = sql_select("article", "*", "numArt = $numArt")[0];
 }
+
+// Load all keywords
+$keywords = sql_select("MOTCLE", "*");
+
+// Load all themes
+$themes = sql_select("THEMATIQUE", "*");
+
+// Load keywords associated with the article
+$articleKeywords = sql_select("MOTCLEARTICLE", "*", "numArt = $numArt");
+$selectedKeywords = array_column($articleKeywords, 'numMotCle');
 ?>
 
 <!-- Bootstrap form to edit an article -->
@@ -15,7 +25,8 @@ if (isset($_GET['numArt'])) {
         </div>
         <div class="col-md-12">
             <!-- Form to edit an article -->
-            <form action="<?php echo ROOT_URL . '/api/articles/update.php' ?>" method="post">
+            <form action="<?php echo ROOT_URL . '/api/articles/update.php' ?>" method="post"
+                enctype="multipart/form-data">
                 <!-- Hidden field for numArt -->
                 <input id="numArt" name="numArt" class="form-control" style="display: none" type="text"
                     value="<?php echo ($numArt); ?>" readonly="readonly" />
@@ -66,14 +77,49 @@ if (isset($_GET['numArt'])) {
                         required><?php echo ($article['libConclArt']); ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="urlPhotArt">URL de la photo</label>
-                    <input id="urlPhotArt" name="urlPhotArt" class="form-control" type="text"
-                        value="<?php echo ($article['urlPhotArt']); ?>" required />
+                    <label for="numThem">Thématique</label>
+                    <select id="numThem" name="numThem" class="form-control" required>
+                        <option value="">--- Choisissez une thématique ---</option>
+                        <?php foreach ($themes as $theme): ?>
+                            <option value="<?php echo $theme['numThem']; ?>" <?php echo ($article['numThem'] == $theme['numThem']) ? 'selected' : ''; ?>>
+                                <?php echo $theme['libThem']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="numThem">Identifiant du thème</label>
-                    <input id="numThem" name="numThem" class="form-control" type="number"
-                        value="<?php echo ($article['numThem']); ?>" required />
+                    <label for="keywords">Mots-clés liés à l'article</label>
+                    <select id="keywords" name="keywords[]" class="form-control" multiple>
+                        <?php foreach ($keywords as $keyword): ?>
+                            <option value="<?php echo $keyword['numMotCle']; ?>" <?php echo in_array($keyword['numMotCle'], $selectedKeywords) ? 'selected' : ''; ?>>
+                                <?php echo $keyword['libMotCle']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mots-clés ajoutés</label>
+                    <div id="selectedKeywords" class="form-control" style="height: auto; min-height: 38px;">
+                        <?php foreach ($keywords as $keyword): ?>
+                            <?php if (in_array($keyword['numMotCle'], $selectedKeywords)): ?>
+                                <span class="badge bg-secondary me-1"><?php echo $keyword['libMotCle']; ?></span>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file">Importer l'illustration</label>
+                    <input type="file" id="file" name="file" class="form-control" accept=".jpg,.gif,.png,.jpeg" />
+                    <small>Extensions acceptées : .jpg, .gif, .png, .jpeg</small>
+                </div>
+                <div class="form-group">
+                    <label>Image actuelle :</label>
+                    <?php if (!empty($article['urlPhotArt'])): ?>
+                        <img src="<?php echo $article['urlPhotArt']; ?>" alt="Image actuelle"
+                            style="max-width: 200px; display: block;">
+                    <?php else: ?>
+                        <p>Aucune image actuellement.</p>
+                    <?php endif; ?>
                 </div>
                 <br />
                 <div class="form-group mt-2">
@@ -84,6 +130,21 @@ if (isset($_GET['numArt'])) {
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript pour gérer l'affichage des mots-clés sélectionnés
+    document.getElementById('keywords').addEventListener('change', function () {
+        const selectedKeywords = document.getElementById('selectedKeywords');
+        selectedKeywords.innerHTML = ''; // Réinitialiser l'affichage
+
+        Array.from(this.selectedOptions).forEach(option => {
+            const badge = document.createElement('span');
+            badge.className = 'badge bg-secondary me-1';
+            badge.textContent = option.text;
+            selectedKeywords.appendChild(badge);
+        });
+    });
+</script>
 
 <?php
 include '../../../footer.php';

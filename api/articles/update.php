@@ -13,8 +13,26 @@ $parag2Art = ctrlSaisies($_POST['parag2Art']);
 $libSsTitr2Art = ctrlSaisies($_POST['libSsTitr2Art']);
 $parag3Art = ctrlSaisies($_POST['parag3Art']);
 $libConclArt = ctrlSaisies($_POST['libConclArt']);
-$urlPhotArt = ctrlSaisies($_POST['urlPhotArt']);
 $numThem = ctrlSaisies($_POST['numThem']);
+
+// Gestion de l'upload du fichier
+$urlPhotArt = ctrlSaisies($_POST['urlPhotArt']); // URL de l'image actuelle
+if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = '../../../uploads/'; // Dossier où les fichiers seront stockés
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true); // Crée le dossier s'il n'existe pas
+    }
+    $uploadFile = $uploadDir . basename($_FILES['file']['name']);
+
+    // Déplace le fichier uploadé vers le dossier de destination
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile)) {
+        $urlPhotArt = $uploadFile; // Met à jour l'URL de la photo
+    } else {
+        // Gestion de l'erreur
+        echo json_encode(array("message" => "Erreur lors de l'upload du fichier."));
+        exit;
+    }
+}
 
 // Construction de la requête de mise à jour
 $attributs = [
@@ -33,6 +51,18 @@ $attributs = [
 
 // Mise à jour de l'article
 sql_update(table: "ARTICLE", attributs: implode(", ", $attributs), where: "numArt = $numArt");
+
+// Gestion des mots-clés
+if (!empty($_POST['keywords'])) {
+    // Supprimer les anciennes associations de mots-clés
+    sql_delete("MOTCLEARTICLE", "numArt = $numArt");
+
+    // Ajouter les nouvelles associations de mots-clés
+    foreach ($_POST['keywords'] as $keywordId) {
+        $keywordId = ctrlSaisies($keywordId);
+        sql_insert('MOTCLEARTICLE', 'numArt, numMotCle', "'$numArt', '$keywordId'");
+    }
+}
 
 // Redirection vers la liste des articles
 header('Location: ../../views/backend/articles/list.php');
