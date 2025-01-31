@@ -17,6 +17,11 @@ include '../../../header.php';
                     <input id="libThem" name="libThem" class="form-control" type="text" autofocus="autofocus" />
                 </div>
                 <br />
+                <div class="form-group">
+                    <label for="numThem">Nom de la thématique</label>
+                    <input id="numThem" name="numThem" class="form-control" type="text" autofocus="autofocus" />
+                </div>
+                <br>
                 <div class="form-group mt-2">
                     <a href="list.php" class="btn btn-primary">List</a>
                     <button type="submit" class="btn btn-success">Confirmer create ?</button>
