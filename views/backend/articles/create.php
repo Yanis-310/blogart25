@@ -1,5 +1,11 @@
 <?php
 include '../../../header.php';
+
+// Load all keywords
+$keywords = sql_select("MOTCLE", "*");
+
+// Load all themes
+$themes = sql_select("THEMATIQUE", "*");
 ?>
 
 <!-- Bootstrap form to create a new article -->
@@ -12,7 +18,6 @@ include '../../../header.php';
             <!-- Form to create a new article -->
             <form action="<?php echo ROOT_URL . '/api/articles/create.php' ?>" method="post"
                 enctype="multipart/form-data">
-
                 <div class="form-group">
                     <label for="libTitrArt">Titre de l'article</label>
                     <input id="libTitrArt" name="libTitrArt" class="form-control" type="text" autofocus="autofocus"
@@ -51,28 +56,33 @@ include '../../../header.php';
                     <textarea id="libConclArt" name="libConclArt" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="urlPhotArt">URL de la photo</label>
-                    <input id="urlPhotArt" name="urlPhotArt" class="form-control" type="text" />
-                </div>
-                <div class="form-group">
-                    <label for="numThem">Identifiant du thème</label>
-                    <input id="numThem" name="numThem" class="form-control" type="number" required />
-                </div>
-                <div class="form-group">
-                    <label for="keywords">Mots-clés</label>
-                    <select id="keywords" name="keywords[]" class="form-control" multiple>
-                        <?php
-                        // Load all keywords
-                        $keywords = sql_select("MOTCLE", "*");
-                        foreach ($keywords as $keyword) {
-                            echo '<option value="' . $keyword['numMotCle'] . '">' . $keyword['libMotCle'] . '</option>';
-                        }
-                        ?>
+                    <label for="numThem">Thématique</label>
+                    <select id="numThem" name="numThem" class="form-control" required>
+                        <option value="">--- Choisissez une thématique ---</option>
+                        <?php foreach ($themes as $theme): ?>
+                            <option value="<?php echo $theme['numThem']; ?>"><?php echo $theme['libThem']; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="keywords">Mots-clés liés à l'article</label>
+                    <select id="keywords" name="keywords[]" class="form-control" multiple>
+                        <?php foreach ($keywords as $keyword): ?>
+                            <option value="<?php echo $keyword['numMotCle']; ?>"><?php echo $keyword['libMotCle']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mots-clés ajoutés</label>
+                    <div id="selectedKeywords" class="form-control" style="height: auto; min-height: 38px;">
+                        <!-- Les mots-clés sélectionnés apparaîtront ici -->
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="file">Importer l'illustration</label>
-                    <input type="file" id="file" name="file" class="form-control" accept=".jpg,.gif,.png,.jpeg" />
+                    <input type="file" id="file" name="file" class="form-control" accept=".jpg,.gif,.png,.jpeg"
+                        required />
                     <small>Extensions acceptées : .jpg, .gif, .png, .jpeg</small>
                 </div>
                 <br />
@@ -84,6 +94,21 @@ include '../../../header.php';
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript pour gérer l'affichage des mots-clés sélectionnés
+    document.getElementById('keywords').addEventListener('change', function () {
+        const selectedKeywords = document.getElementById('selectedKeywords');
+        selectedKeywords.innerHTML = ''; // Réinitialiser l'affichage
+
+        Array.from(this.selectedOptions).forEach(option => {
+            const badge = document.createElement('span');
+            badge.className = 'badge bg-secondary me-1';
+            badge.textContent = option.text;
+            selectedKeywords.appendChild(badge);
+        });
+    });
+</script>
 
 <?php
 include '../../../footer.php';
