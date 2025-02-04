@@ -110,19 +110,35 @@ $selectedKeywords = array_column($articleKeywords, 'numMotCle');
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="file">Importer l'illustration</label>
+                    <label for="file">Importer une nouvelle illustration</label>
                     <input type="file" id="file" name="file" class="form-control" accept=".jpg,.gif,.png,.jpeg" />
                     <small>Extensions acceptées : .jpg, .gif, .png, .jpeg</small>
                 </div>
                 <div class="form-group">
-                    <label>Image actuelle :</label>
-                    <?php if (!empty($article['urlPhotArt'])): ?>
-                        <img src="<?php echo $article['urlPhotArt']; ?>" alt="Image actuelle"
-                            style="max-width: 200px; display: block;">
-                    <?php else: ?>
-                        <p>Aucune image actuellement.</p>
-                    <?php endif; ?>
+                    <label>Aperçu de la nouvelle image :</label>
+                    <img id="imagePreview" src="#" alt="Aperçu de l'image"
+                        style="max-width: 100%; max-height: 200px; display: none;" />
                 </div>
+
+                <script>
+                    // JavaScript pour afficher l'aperçu de l'image sélectionnée
+                    document.getElementById('file').addEventListener('change', function (event) {
+                        const imagePreview = document.getElementById('imagePreview');
+                        const file = event.target.files[0];
+
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                imagePreview.src = e.target.result;
+                                imagePreview.style.display = 'block';
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            imagePreview.src = '#';
+                            imagePreview.style.display = 'none';
+                        }
+                    });
+                </script>
                 <br />
                 <div class="form-group mt-2">
                     <a href="list.php" class="btn btn-primary">Liste des articles</a>
@@ -133,20 +149,6 @@ $selectedKeywords = array_column($articleKeywords, 'numMotCle');
     </div>
 </div>
 
-<script>
-    // JavaScript pour gérer l'affichage des mots-clés sélectionnés
-    document.getElementById('keywords').addEventListener('change', function () {
-        const selectedKeywords = document.getElementById('selectedKeywords');
-        selectedKeywords.innerHTML = ''; // Réinitialiser l'affichage
-
-        Array.from(this.selectedOptions).forEach(option => {
-            const badge = document.createElement('span');
-            badge.className = 'badge bg-secondary me-1';
-            badge.textContent = option.text;
-            selectedKeywords.appendChild(badge);
-        });
-    });
-</script>
 
 <?php
 include '../../../footer.php';

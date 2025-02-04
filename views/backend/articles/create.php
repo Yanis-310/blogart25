@@ -80,10 +80,15 @@ $themes = sql_select("THEMATIQUE", "*");
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="file">Importer l'illustration</label>
-                    <input type="file" id="file" name="file" class="form-control" accept=".jpg,.gif,.png,.jpeg"
-                        required />
+                    <label for="urlPhotArt">Choisir une image :</label>
+                    <input type="file" id="urlPhotArt" name="urlPhotArt" class="form-control"
+                        accept=".jpg, .jpeg, .png, .gif" required />
                     <small>Extensions acceptées : .jpg, .gif, .png, .jpeg</small>
+                </div>
+                <div class="form-group">
+                    <label>Aperçu de l'image :</label>
+                    <img id="imagePreview" src="#" alt="Aperçu de l'image"
+                        style="max-width: 100%; max-height: 200px; display: none;" />
                 </div>
                 <br />
                 <div class="form-group mt-2">
@@ -107,6 +112,24 @@ $themes = sql_select("THEMATIQUE", "*");
             badge.textContent = option.text;
             selectedKeywords.appendChild(badge);
         });
+    });
+
+    // JavaScript pour afficher l'aperçu de l'image sélectionnée
+    document.getElementById('urlPhotArt').addEventListener('change', function (event) {
+        const imagePreview = document.getElementById('imagePreview');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = '#';
+            imagePreview.style.display = 'none';
+        }
     });
 </script>
 
