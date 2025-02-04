@@ -1,35 +1,52 @@
 <?php
 include '../../../header.php';
-//Security check
-//Level 1 mean administator in DB
-/* if (!check_access(1)) {
-    header('Location: /'); //Redirect to home
-    exit();
-} */
+require_once '../../../functions/ctrlSaisies.php';
 
-$numMemb = $_GET['numMemb'];
-$pseudoMemb = sql_select("membre", "pseudoMemb", "numMemb = $numMemb")[0]['pseudoMemb'];
 
+if (!isset($_GET['numMemb']) || empty($_GET['numMemb'])) {
+    die("Erreur : Aucun membre sélectionné.");
+}
+
+
+$numMemb = intval($_GET['numMemb']);
+$membre = sql_select("MEMBRE", "*", "numMemb = $numMemb")[0] ?? null;
+
+
+if (!$membre) {
+    die("Erreur : Membre introuvable.");
+}
+
+
+$statut = sql_select('STATUT', 'libStat', "numStat = {$membre['numStat']}")[0]['libStat'] ?? 'Inconnu';
+
+
+if ($membre['numStat'] == 1) {
+    echo "<div class='container'><label>Un administrateur ne peut pas être supprimé</label></div>";
+    exit;
+}
 ?>
 
-<!--Bootstrap form to create a new status-->
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Delete Status</h1>
-        </div>
-        <div class="col-md-12">
-            <!--Form to create a new status-->
-            <form action="<?php echo ROOT_URL . '/api/users/delete.php' ?>" method="post">
+            <h1>Suppression d'un membre</h1>
+            <form action="<?= ROOT_URL . '/api/members/delete.php?numMemb=' . $numMemb ?>" method="post">
+                <?php
+                $champs = ['pseudoMemb' => 'Pseudo', 'prenomMemb' => 'Prénom', 'nomMemb' => 'Nom', 'eMailMemb' => 'Email'];
+                foreach ($champs as $key => $label) {
+                    echo "<div class='form-group'><label for='$key'>$label</label>
+                          <input id='$key' name='$key' class='form-control' type='text' value='{$membre[$key]}' disabled/></div><br/>";
+                }
+                ?>
                 <div class="form-group">
-                    <label for="pseudoMemb">pseudoMemb</label>
-                    <input id="numMemb" class="form-control" style="display: none" type="text" name="numMemb"
-                        value="<?php echo ($numMemb) ?>" readonly="readonly">
-                    <input id="pseudoMemb" class="form-control" type="text" name="pseudoMemb"
-                        value="<?php echo ($pseudoMemb) ?>" readonly="readonly">
+                    <label for="numStat">Statut</label>
+                    <input id="numStat" name="numStat" class="form-control" type="text" value="<?= $statut; ?>"
+                        disabled />
                 </div>
+                <br>
                 <div class="form-group mt-2">
-                    <button type="submit" class="btn btn-danger">Confirm deletion ?</button>
+                    <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
                 </div>
             </form>
         </div>
