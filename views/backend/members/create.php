@@ -25,6 +25,7 @@ include '../../../header.php';
                     <input id="nomMemb" class="form-control" type="text" name="nomMemb">
 
 
+
                     <label for="pseudoMemb">pseudoMemb</label>
                     <input id="pseudoMemb" class="form-control" type="text" name="pseudoMemb">
 
