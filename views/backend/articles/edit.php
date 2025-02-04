@@ -6,6 +6,8 @@ if (isset($_GET['numArt'])) {
     $article = sql_select("article", "*", "numArt = $numArt")[0];
 }
 
+//test
+
 // Load all keywords
 $keywords = sql_select("MOTCLE", "*");
 
