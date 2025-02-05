@@ -1,5 +1,5 @@
 <?php
-include '../../../header.php';
 
-echo("Form signup");
+
+echo ("Form signup");
 
