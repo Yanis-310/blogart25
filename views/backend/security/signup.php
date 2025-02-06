@@ -1,159 +1,117 @@
 <?php
-session_start();
 include '../../../header.php';
+
+
+$membres = sql_select('MEMBRE', '*');
+$statuts = sql_select('STATUT', '*');
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Inscription</title>
-    <style>
-        /* Reset CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        button {
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 1rem;
-            color: #555;
-        }
-
-        .login-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h2>Inscription</h2>
-        <form action="<?php echo ROOT_URL . '/api/security/signup.php' ?>" method="POST">
-            <!-- Nom -->
-            <div class="form-group">
-                <label for="surname">Nom :</label>
-                <input type="text" id="surname" name="surname" required minlength="2" maxlength="70">
-            </div>
-
-            <!-- Prénom -->
-            <div class="form-group">
-                <label for="name">Prénom :</label>
-                <input type="text" id="name" name="name" required minlength="2" maxlength="70">
-            </div>
-
-            <!-- Pseudo -->
-            <div class="form-group">
-                <label for="pseudo">Pseudo :</label>
-                <input type="text" id="pseudo" name="pseudo" required minlength="6" maxlength="70">
-            </div>
-
-            <!-- Email -->
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required minlength="6" maxlength="70">
-            </div>
-
-            <!-- Confirmer Email -->
-            <div class="form-group">
-                <label for="confemail">Confirmer Email :</label>
-                <input type="email" id="confemail" name="confemail" required minlength="6" maxlength="70">
-            </div>
-
-            <!-- Mot de passe -->
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" required minlength="8" maxlength="15">
-            </div>
-
-            <!-- Confirmer Mot de passe -->
-            <div class="form-group">
-                <label for="confpassword">Confirmer Mot de passe :</label>
-                <input type="password" id="confpassword" name="confpassword" required minlength="8" maxlength="15">
-            </div>
-
-            <!-- Bouton de soumission -->
-            <button type="submit">S'inscrire</button>
-        </form>
-
-        <!-- Lien vers la page de connexion -->
-        <div class="login-link">
-            <p>Déjà inscrit ? <a href="<?php echo ROOT_URL . '/views/backend/security/login.php' ?>">Connectez-vous
-                    ici</a></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Création d'un membre</h1>
+        </div>
+        <div class="col-md-12">
+            <form action="<?php echo ROOT_URL . '/api/members/create.php' ?>" id="form-recaptcha" method="post"
+                enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="pseudoMemb">Pseudo (non modifiable)</label>
+                    <input id="pseudoMemb" name="pseudoMemb" class="form-control" type="text" autofocus="autofocus" />
+                    <small id="emailHelp" class="form-text text-muted">(Entre 6 et 70 car.)</small>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="prenomMemb">Prénom</label>
+                    <input id="prenomMemb" name="prenomMemb" class="form-control" type="text" autofocus="autofocus" />
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="nomMemb">Nom</label>
+                    <input id="nomMemb" name="nomMemb" class="form-control" type="text" autofocus="autofocus" />
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="passMemb1">Mot de passe</label>
+                    <input id="passMemb1" name="passMemb1" class="form-control" type="password" autofocus="autofocus">
+                    <small id="passHelp" class="form-text text-muted">(Entre 8 et 15 caractères, au moins une majuscule,
+                        une minuscule, un chiffre, caractères spéciaux acceptés)</small>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="visuMdp1" name="visuMdp"
+                        onchange="togglePasswordVisibility('passMemb1', 'visuMdp1')">
+                    <label for="visuMdp1">Afficher le mot de passe</label>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="passMemb2">Confirmer le mot de passe</label>
+                    <input id="passMemb2" name="passMemb2" class="form-control" type="password" autofocus="autofocus">
+                    <small id="passHelp" class="form-text text-muted">(Entre 8 et 15 caractères, au moins une majuscule,
+                        une minuscule, un chiffre, caractères spéciaux acceptés)</small>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="visuMdp2" name="visuMdp"
+                        onchange="togglePasswordVisibility('passMemb2', 'visuMdp2')">
+                    <label for="visuMdp2">Afficher le mot de passe</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="email1">Email</label>
+                    <input id="email1" name="email1" class="form-control" type="text" autofocus="autofocus" />
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="email2">Confimation de l'email</label>
+                    <input id="email2" name="email2" class="form-control" type="text" autofocus="autofocus"></input>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="accord">J'accepte que mes données soient collectées et stockées.</label><br>
+                    <input type="radio" id="oui" name="accordMemb" value="1">
+                    <label for="accordMemb">Oui</label><br>
+                    <input type="radio" id="non" name="accordMemb" value="0" checked>
+                    <label for="accordMemb">Non</label><br>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="numStat">Type de profil</label>
+                    <select class="form-select" name="numStat">
+                        <?php foreach ($statuts as $statut):
+                            $disabled = !($statut['numStat'] == '1') ? 'selected' : 'disabled'; ?>
+                            <option value="<?php echo $statut['numStat']; ?>" <?php echo $disabled ?>>
+                                <?php echo $statut['libStat']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <!-- <div class="form-group">
+                    <div class="form-group mt-2">
+                        <button class="g-recaptcha btn btn-primary" data-sitekey="6LdQWmopAAAAAE0tYo7g6WU0cr5IGUXoke253uka" data-callback='onSubmit' data-action='submit'>Submit</button>
+                    </div>
+                </div> -->
+                <br>
+                <div class="form-group mt-2">
+                    <button type="submit" class="btn btn-primary">Créer un compte</button>
+                </div>
+            </form>
         </div>
     </div>
-</body>
+</div>
 
-</html>
+
+<script>
+    function onSubmit(token) {
+        document.getElementById("form-recaptcha").submit();
+    }
+
+
+    function togglePasswordVisibility(passId, visuId) {
+        var passInput = document.getElementById(passId);
+        var visuCheckbox = document.getElementById(visuId);
+        if (visuCheckbox.checked) {
+            passInput.type = 'text';
+        } else {
+            passInput.type = 'password';
+        }
+    }
+</script>
