@@ -156,5 +156,5 @@ if (!$error) {
 }
 
 
-header('Location: ../../views/backend/members/list.php');
+header('Location: ../../views/backend/index.php');
 ?>
