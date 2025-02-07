@@ -39,7 +39,7 @@ require_once 'config.php';
     <div class="container-fluid">
       <!-- Logo à gauche -->
       <a class="navbar-brand" href="#">
-        <img src="<?php echo ROOT_URL ?>/src/images/logoBlogArt.png" alt="Logo Blog'Art" style="max-height: 60px;">
+        <img src="/src/images/logoBlogArt.png" alt="Logo Blog'Art" style="max-height: 50px;">
       </a>
 
       <!-- Bouton toggle pour les petits écrans -->
@@ -52,10 +52,10 @@ require_once 'config.php';
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Accueil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/views/backend/dashboard.php">Admin</a>
+            <a class="nav-link" href="/views/backend/dashboard.php">Administrateur</a>
           </li>
         </ul>
       </div>
@@ -65,8 +65,8 @@ require_once 'config.php';
         <form class="d-flex me-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Rechercher sur le site…" aria-label="Search">
         </form>
-        <a class="btn btn-outline-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
-        <a class="btn btn-outline-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
+        <a class="btn btn-outline-primary m-1" href="/views/backend/security/login.php" role="button">Se connecter</a>
+        <a class="btn btn-outline-dark m-1" href="/views/backend/security/signup.php" role="button">Se déconnecter</a>
       </div>
     </div>
   </nav>
@@ -78,8 +78,8 @@ require_once 'config.php';
         <h1 class="mb-4 text-center">À propos de notre studio</h1>
         <div class="about-content d-flex align-items-center justify-content-center">
           <!-- Image section -->
-          <img src="/reporter-bootstrap-main/source/images/1.jpg" alt="Notre studio" class="about-image"
-            style="max-width: 50%; margin-right: 20px; border-radius: 8px;">
+          <img src="/reporter-bootstrap-main/source/images/" alt="Notre studio" class="about-image"
+            style="max-width: 50%; margin-right: 50px; border-radius: 8px;">
           <!-- Text section -->
           <div class="about-text">
             <h2>Notre histoire</h2>
@@ -104,29 +104,29 @@ require_once 'config.php';
     <h2 class="text-center mb-4">Rencontrez notre équipe</h2>
     <div class="row text-center">
       <div class="col-md-2">
-        <img src="/reporter-bootstrap-main/source/images/moi.png" alt="Membre 1" class="img-fluid rounded-circle mb-3"
-          style="width: 150px;">
-        <p>Membre 1</p>
+        <img src="/reporter-bootstrap-main/source/images/Yanis.png" alt="Membre 1" class="img-fluid rounded-circle mb-3"
+          style="width: 170px;">
+        <p>Yanis</p>
       </div>
       <div class="col-md-2">
-        <img src="/reporter-bootstrap-main/source/images/moi.png" alt="Membre 2" class="img-fluid rounded-circle mb-3"
-          style="width: 150px;">
-        <p>Membre 2</p>
+        <img src="/reporter-bootstrap-main/source/images/Margaux.png" alt="Membre 2"
+          class="img-fluid rounded-circle mb-3" style="width: 170px;">
+        <p>Margaux</p>
       </div>
       <div class="col-md-2">
-        <img src="/reporter-bootstrap-main/source/images/moi.png" alt="Membre 3" class="img-fluid rounded-circle mb-3"
-          style="width: 150px;">
-        <p>Membre 3</p>
+        <img src="/reporter-bootstrap-main/source/images/Kyara.png" alt="Membre 3" class="img-fluid rounded-circle mb-3"
+          style="width: 170px;">
+        <p>Kyara</p>
       </div>
       <div class="col-md-2">
-        <img src="/reporter-bootstrap-main/source/images/moi.png" alt="Membre 4" class="img-fluid rounded-circle mb-3"
-          style="width: 150px;">
-        <p>Membre 4</p>
+        <img src="/reporter-bootstrap-main/source/images/Manon.png" alt="Membre 4" class="img-fluid rounded-circle mb-3"
+          style="width: 170px;">
+        <p>Manon</p>
       </div>
       <div class="col-md-2">
-        <img src="/reporter-bootstrap-main/source/images/moi.png" alt="Membre 5" class="img-fluid rounded-circle mb-3"
-          style="width: 150px;">
-        <p>Membre 5</p>
+        <img src="/reporter-bootstrap-main/source/images/Helene.png" alt="Membre 5"
+          class="img-fluid rounded-circle mb-3" style="width: 170px;">
+        <p>Hélène</p>
       </div>
     </div>
   </div>

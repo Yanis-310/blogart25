@@ -17,10 +17,11 @@
 			<div class="col-lg-4 col-md-6 mb-4">
 				<h5 class="mb-3 text-uppercase">Liens rapides</h5>
 				<ul class="list-unstyled">
-					<li><a href="about.html" class="text-white-50">À propos</a></li>
+					<li><a href="about.php" class="text-white-50">À propos</a></li>
 					<li><a href="article.html" class="text-white-50">Articles</a></li>
-					<li><a href="privacy-policy.html" class="text-white-50">Politique de confidentialité</a></li>
-					<li><a href="terms-conditions.html" class="text-white-50">Conditions générales</a></li>
+					<li><a href="rgpd/Mentions.php" class="text-white-50">Mentions légale</a></li>
+					<li><a href="/views/frontend/rgpd/rgpd.php"
+							style="text-decoration: underline; display: inline-block;">RGPD</a></li>
 				</ul>
 			</div>
 

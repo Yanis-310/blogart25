@@ -30,6 +30,7 @@
 <?php
 // Load config
 require_once 'config.php';
+session_start();
 ?>
 
 <body>
@@ -51,21 +52,27 @@ require_once 'config.php';
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Accueil</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/views/backend/dashboard.php">Admin</a>
-          </li>
+          <?php if (isset($_SESSION['pseudoMemb']) && $_SESSION['pseudoMemb'] === 'Admin99'): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="/views/backend/dashboard.php">Administrateur</a>
+            </li>
+          <?php endif; ?>
         </ul>
       </div>
 
-      <!-- Recherche et boutons de login/signup -->
+      <!-- Recherche et boutons de login/signup ou logout -->
       <div class="d-flex align-items-center">
         <form class="d-flex me-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Rechercher sur le site…" aria-label="Search">
         </form>
-        <a class="btn btn-outline-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
-        <a class="btn btn-outline-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
+        <?php if (!isset($_SESSION['pseudoMemb'])): ?>
+          <a class="btn btn-outline-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
+          <a class="btn btn-outline-dark m-1" href="/views/backend/security/signup.php" role="button">Se déconnecter</a>
+        <?php else: ?>
+          <a class="btn btn-danger m-1" href="/api/security/disconnect.php" role="button">Se déconnecter</a>
+        <?php endif; ?>
       </div>
     </div>
   </nav>

@@ -1,55 +1,30 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once '../../functions/ctrlSaisies.php';
-
-
-
-
 session_start();
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $pseudo = ctrlSaisies($_POST['pseudo']);
+    $password = ctrlSaisies($_POST['password']);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $pseudologin = trim($_POST['pseudo']);
-    $password = $_POST['password'];
+    // Vérifier si l'utilisateur existe avec ce pseudo
+    $user = sql_select("MEMBRE", "*", "pseudoMemb = '$pseudo'");
 
+    if ($user) {
+        if (password_verify($password, $user[0]['passMemb'])) {
+            $_SESSION['user_id'] = $user[0]['numMemb'];
+            $_SESSION['pseudoMemb'] = $user[0]['pseudoMemb'];
 
-
-
-    $pseudo = sql_select("MEMBRE", "pseudoMemb");
-    $mdp = sql_select("MEMBRE", "passMemb");
-
-
-
-    foreach ($pseudo as $key => $value) {
-        if ($pseudologin == $value["pseudoMemb"]) {
-
-
-            foreach ($mdp as $key => $values) {
-                if (password_verify($password, $values["passMemb"])) {
-                    $_SESSION["pseudoMemb"] = $pseudologin;
-                    header('Location: ../../../index.php');
-                    exit();
-                } elseif ($password == $values["passMemb"]) {
-                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-
-
-
-                    sql_update("MEMBRE", "passMemb = '$hashedPassword'", "pseudoMemb = '$pseudologin'");
-
-
-
-
-                    $_SESSION["pseudoMemb"] = $pseudologin;
-                    header('Location: ../../../index.php');
-                    exit();
-                }
-            }
+            header("Location: " . ROOT_URL . "/index.php");
+            $_SESSION['pseudoMemb'] = $pseudo; // Stocke le pseudo en session
+            exit();
+        } else {
+            header("Location: " . ROOT_URL . "/views/security/login.php?error=Mot de passe incorrect");
+            exit();
         }
+    } else {
+        header("Location: " . ROOT_URL . "/views/security/login.php?error=Pseudo ou mot de passe incorrect");
+        exit();
     }
-
-
-    header('Location: ../../../login.php?error=1');
-    exit();
 }
 ?>

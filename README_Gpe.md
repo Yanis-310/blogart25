@@ -2,8 +2,8 @@
 
 ## Setup
 
-
 ## Architecture
+
 - **api** - Contains all php calls for example "create.php" for statuts, articles
 - **classes** - Contains all classes for example "members.php"
 - **config** - Contains all the configuration files specific to the operation of the application, for example "security.php"
@@ -12,8 +12,21 @@
 - **src** - Contain all sources files or external libs
 
 ## Files to complete
+
 - **.env** - Foreach user exemple in .env.example
 - **config/security.php** - Check user cookie
 - **index.php** - Must be the homepage
 - **views** - All your pages
-- 
+-
+
+ADMIN
+nom : Admin99
+MPD ADMIN : 12345678
+
+Membre :
+nom : migossss
+MDP Admin : Yayata33310!
+
+Tout ce qu'on a réalisé :
+crud :
+Statut ,membre , article ,membre ,thematique, commentaire qui ne fonctionne pas , likes qui s'affichent mais on ne peut pas liker. et mot clé.

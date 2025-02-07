@@ -9,12 +9,12 @@ $keywords = sql_select("motcle", "*");
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Thématiques</h1>
+            <h1>Mot-clé.</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nom des thématiques</th>
+                        <th> mot-clé.</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

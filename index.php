@@ -8,6 +8,64 @@ $article = sql_select("article", "*");
 
 <main>
     <section class="section">
+        <!-- Button trigger modal -->
+        <!-- Cookie Button -->
+        <button type="button" class="btn btn-primary fixed-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Cookies
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">cookies</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Nous utilisons des cookies pour améliorer votre expérience sur notre site de rap. En continuant
+                        à naviguer sur notre blog, vous acceptez notre <a href="/politique-de-confidentialite">politique
+                            de confidentialité</a> et notre utilisation des cookies. Si vous souhaitez en savoir plus ou
+                        gérer vos préférences, cliquez ici.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .fixed-btn {
+                position: fixed;
+                bottom: 20px;
+                /* Distance du bas de la page */
+                left: 10px;
+                /* Placer à gauche de la fenêtre */
+                z-index: 1050;
+                /* S'assurer que le bouton soit au-dessus des autres éléments */
+                padding: 10px 20px;
+                /* Pour ajuster la taille du bouton */
+                background-color: rgb(75, 83, 77);
+                /* Couleur verte du bouton */
+                color: white;
+                /* Couleur du texte */
+                border: none;
+                /* Enlever la bordure par défaut */
+                border-radius: 5px;
+                /* Arrondir les bords du bouton */
+                font-size: 14px;
+                /* Taille de police */
+            }
+
+            .fixed-btn:hover {
+                background-color: rgb(65, 65, 65);
+                /* Changer la couleur du bouton au survol */
+            }
+        </style>
+
+
         <div class="container">
             <div class="row no-gutters-lg">
                 <div class="col-12">
@@ -21,7 +79,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[0]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes de lecture</span>
+                                            <span class="text-uppercase">10 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[0]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -34,7 +92,7 @@ $article = sql_select("article", "*");
                                         </a></h2>
                                     <p><?php echo $article[0]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[0]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[0]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -46,7 +104,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[1]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes de letcure</span>
+                                            <span class="text-uppercase">12 minutes de letcure</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[1]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -59,7 +117,7 @@ $article = sql_select("article", "*");
                                         </a></h2>
                                     <p class="card-text"><?php echo $article[1]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[1]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[1]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -71,7 +129,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[2]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes de lecture</span>
+                                            <span class="text-uppercase">8 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[2]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -83,7 +141,7 @@ $article = sql_select("article", "*");
                                     <h2 class="h1"> <?php echo $article[2]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[2]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[2]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[2]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -95,7 +153,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[3]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes de lecture</span>
+                                            <span class="text-uppercase">12 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[3]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -107,7 +165,7 @@ $article = sql_select("article", "*");
                                     <h2 class="h1"> <?php echo $article[3]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[3]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[3]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[3]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -119,7 +177,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[4]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes de lecture</span>
+                                            <span class="text-uppercase">10 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[4]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -132,7 +190,7 @@ $article = sql_select("article", "*");
                                     <h2 class="h1"> <?php echo $article[4]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[4]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[4]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[4]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -144,7 +202,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[5]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes de lecture</span>
+                                            <span class="text-uppercase">10 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[5]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -157,7 +215,7 @@ $article = sql_select("article", "*");
                                             <?php echo $article[5]["libTitrArt"] ?></a></h2>
                                     <p class="card-text"><?php echo $article[5]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
-                                            href="/views/frontend/articles/article.php?id=<?php echo $article[5]['numArt']; ?>">Lire
+                                            href="/views/frontend/articles/article1.php?id=<?php echo $article[5]['numArt']; ?>">Lire
                                             en entier</a>
                                     </div>
                                 </div>
@@ -207,6 +265,7 @@ $article = sql_select("article", "*");
                 <?php include('reporter-bootstrap-main/source/partials/sidebar.php') ?>
             </div>
         </div>
+
     </section>
 </main>
 
@@ -214,4 +273,3 @@ $article = sql_select("article", "*");
 
 
 <?php require_once 'footer.php'; ?>
-?>
