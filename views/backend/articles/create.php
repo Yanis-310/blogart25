@@ -1,137 +1,129 @@
 <?php
-include '../../../header.php';
+require_once '../../../header.php';
 
-// Load all keywords
-$keywords = sql_select("MOTCLE", "*");
-
-// Load all themes
-$themes = sql_select("THEMATIQUE", "*");
+$thematiques = sql_select('THEMATIQUE', '*');
 ?>
 
-<!-- Bootstrap form to create a new article -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Création d'un nouvel article</h1>
-        </div>
-        <div class="col-md-12">
-            <!-- Form to create a new article -->
-            <form action="<?php echo ROOT_URL . '/api/articles/create.php' ?>" method="post"
-                enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="libTitrArt">Titre de l'article</label>
-                    <input id="libTitrArt" name="libTitrArt" class="form-control" type="text" autofocus="autofocus"
-                        required />
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Création d'un Nouvel Article</h1>
+    <div class="card shadow-sm p-4">
+        <form action="<?php echo ROOT_URL . '/api/articles/create.php' ?>" method="post" id="form"
+            enctype="multipart/form-data">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="titre" class="form-label">Titre</label>
+                    <input id="titre" name="libTitrArt" class="form-control" type="text"
+                        placeholder="Sur 100 caractères" required>
                 </div>
-                <div class="form-group">
-                    <label for="libChapoArt">Chapô de l'article</label>
-                    <textarea id="libChapoArt" name="libChapoArt" class="form-control" required></textarea>
+                <div class="col-md-6">
+                    <label for="Datecreation" class="form-label">Date de création</label>
+                    <input id="Datecreation" name="dtCreaArt" class="form-control" type="datetime-local" required>
                 </div>
-                <div class="form-group">
-                    <label for="libAccrochArt">Accroche de l'article</label>
-                    <textarea id="libAccrochArt" name="libAccrochArt" class="form-control" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="Chapeau" class="form-label">Chapeau</label>
+                <textarea id="Chapeau" name="libChapoArt" class="form-control"
+                    placeholder="Décrivez le chapeau (500 caractères max)" maxlength="500" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="Accroche1" class="form-label">Accroche Paragraphe 1</label>
+                <input id="Accroche1" name="libAccrochArt" class="form-control" type="text" maxlength="100" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="Paragraphe1" class="form-label">Paragraphe 1</label>
+                <textarea id="Paragraphe1" name="parag1Art" class="form-control"
+                    placeholder="Décrivez le premier paragraphe (1200 caractères max)" maxlength="1200" rows="4"
+                    required></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="Soustitre1" class="form-label">Sous-titre 1</label>
+                    <input id="Soustitre1" name="libSsTitr1Art" class="form-control" type="text" maxlength="100"
+                        required>
                 </div>
-                <div class="form-group">
-                    <label for="parag1Art">Premier paragraphe</label>
-                    <textarea id="parag1Art" name="parag1Art" class="form-control" required></textarea>
+                <div class="col-md-6 mb-3">
+                    <label for="Paragraphe2" class="form-label">Paragraphe 2</label>
+                    <textarea id="Paragraphe2" name="parag2Art" class="form-control"
+                        placeholder="Décrivez le deuxième paragraphe (1200 caractères max)" maxlength="1200"
+                        rows="4"></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="libSsTitr1Art">Premier sous-titre</label>
-                    <input id="libSsTitr1Art" name="libSsTitr1Art" class="form-control" type="text" required />
-                </div>
-                <div class="form-group">
-                    <label for="parag2Art">Deuxième paragraphe</label>
-                    <textarea id="parag2Art" name="parag2Art" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="libSsTitr2Art">Deuxième sous-titre</label>
-                    <input id="libSsTitr2Art" name="libSsTitr2Art" class="form-control" type="text" required />
-                </div>
-                <div class="form-group">
-                    <label for="parag3Art">Troisième paragraphe</label>
-                    <textarea id="parag3Art" name="parag3Art" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="libConclArt">Conclusion de l'article</label>
-                    <textarea id="libConclArt" name="libConclArt" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="numThem">Thématique</label>
-                    <select id="numThem" name="numThem" class="form-control" required>
-                        <option value="">--- Choisissez une thématique ---</option>
-                        <?php foreach ($themes as $theme): ?>
-                            <option value="<?php echo $theme['numThem']; ?>"><?php echo $theme['libThem']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="keywords">Mots-clés liés à l'article</label>
-                    <select id="keywords" name="keywords[]" class="form-control" multiple>
-                        <?php foreach ($keywords as $keyword): ?>
-                            <option value="<?php echo $keyword['numMotCle']; ?>"><?php echo $keyword['libMotCle']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Mots-clés ajoutés</label>
-                    <div id="selectedKeywords" class="form-control" style="height: auto; min-height: 38px;">
-                        <!-- Les mots-clés sélectionnés apparaîtront ici -->
+            </div>
+
+            <div class="mb-3">
+                <label for="Paragraphe3" class="form-label">Paragraphe 3</label>
+                <textarea id="Paragraphe3" name="parag3Art" class="form-control"
+                    placeholder="Décrivez le troisième paragraphe (1200 caractères max)" maxlength="1200"
+                    rows="4"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="Conclusion" class="form-label">Conclusion</label>
+                <textarea id="Conclusion" name="libConclArt" class="form-control"
+                    placeholder="Décrivez la conclusion (500 caractères max)" maxlength="500" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="urlPhotArt" class="form-label">Choisir une image</label>
+                <input type="file" id="urlPhotArt" name="urlPhotArt" class="form-control"
+                    accept=".jpg, .jpeg, .png, .gif">
+                <small class="text-muted">Extensions acceptées : .jpg, .gif, .png, .jpeg (taille max : 200 Mo)</small>
+            </div>
+
+            <div class="mb-3">
+                <label for="numThem" class="form-label">Thématique</label>
+                <select class="form-select" name="numThem" required>
+                    <?php foreach ($thematiques as $thematique): ?>
+                        <option value="<?php echo $thematique['numThem']; ?>"><?php echo $thematique['libThem']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="addMotCle" class="form-label">Choisissez les mots-clés liés à l'article :</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <select name="addMotCle" id="addMotCle" class="form-control" size="5">
+                            <?php
+                            $result = sql_select('MOTCLE');
+                            foreach ($result as $req) {
+                                echo '<option value="' . $req['numMotCle'] . '">' . $req['libMotCle'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="newMotCle" name="motCle[]" class="form-control" size="5" multiple></select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="urlPhotArt">Choisir une image :</label>
-                    <input type="file" id="urlPhotArt" name="urlPhotArt" class="form-control"
-                        accept=".jpg, .jpeg, .png, .gif" required />
-                    <small>Extensions acceptées : .jpg, .gif, .png, .jpeg</small>
-                </div>
-                <div class="form-group">
-                    <label>Aperçu de l'image :</label>
-                    <img id="imagePreview" src="#" alt="Aperçu de l'image"
-                        style="max-width: 100%; max-height: 200px; display: none;" />
-                </div>
-                <br />
-                <div class="form-group mt-2">
-                    <a href="list.php" class="btn btn-primary">Liste des articles</a>
-                    <button type="submit" class="btn btn-success">Confirmer la création</button>
-                </div>
-            </form>
-        </div>
+            </div>
+
+            <script>
+                const addMotCle = document.getElementById('addMotCle');
+                const newMotCle = document.getElementById('newMotCle');
+
+                addMotCle.addEventListener('click', (e) => {
+                    if (e.target.tagName === "OPTION") {
+                        newMotCle.appendChild(e.target);
+                    }
+                });
+
+                newMotCle.addEventListener('click', (e) => {
+                    if (e.target.tagName === "OPTION") {
+                        addMotCle.appendChild(e.target);
+                    }
+                });
+            </script>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Confirmer la création</button>
+            </div>
+        </form>
     </div>
 </div>
-
-<script>
-    // JavaScript pour gérer l'affichage des mots-clés sélectionnés
-    document.getElementById('keywords').addEventListener('change', function () {
-        const selectedKeywords = document.getElementById('selectedKeywords');
-        selectedKeywords.innerHTML = ''; // Réinitialiser l'affichage
-
-        Array.from(this.selectedOptions).forEach(option => {
-            const badge = document.createElement('span');
-            badge.className = 'badge bg-secondary me-1';
-            badge.textContent = option.text;
-            selectedKeywords.appendChild(badge);
-        });
-    });
-
-    // JavaScript pour afficher l'aperçu de l'image sélectionnée
-    document.getElementById('urlPhotArt').addEventListener('change', function (event) {
-        const imagePreview = document.getElementById('imagePreview');
-        const file = event.target.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.src = '#';
-            imagePreview.style.display = 'none';
-        }
-    });
-</script>
 
 <?php
 include '../../../footer.php';

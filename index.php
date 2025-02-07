@@ -3,6 +3,7 @@ require_once 'header.php';
 sql_connect();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 $article = sql_select("article", "*");
+
 ?>
 
 <main>
@@ -20,7 +21,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[0]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes read</span>
+                                            <span class="text-uppercase">3 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[0]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -28,12 +29,8 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-1">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">travel</a>
-                                            <a href="#!">news</a>
-                                        </li>
                                     </ul>
-                                    <h2 class="h1"><a class="post-title" href="article.html">
-                                            <?php echo $article[0]["libTitrArt"] ?>
+                                    <h2 class="h1"> <?php echo $article[0]["libTitrArt"] ?>
                                         </a></h2>
                                     <p><?php echo $article[0]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
@@ -49,7 +46,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[1]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes read</span>
+                                            <span class="text-uppercase">2 minutes de letcure</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[1]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -57,11 +54,8 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-0">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">travel</a>
-                                        </li>
                                     </ul>
-                                    <h2 class="h1"><a class="post-title" href="article.html">
-                                            <?php echo $article[1]["libTitrArt"] ?>
+                                    <h2 class="h1"> <?php echo $article[1]["libTitrArt"] ?>
                                         </a></h2>
                                     <p class="card-text"><?php echo $article[1]["libChapoArt"] ?></p>
                                     <div class="content"> <a class="read-more-btn"
@@ -77,7 +71,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[2]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes read</span>
+                                            <span class="text-uppercase">2 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[2]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -85,14 +79,12 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-0">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">lifestyle</a>
-                                        </li>
                                     </ul>
-                                    <h2 class="h1"><a class="post-title" href="article.html">
-                                            <?php echo $article[2]["libTitrArt"] ?></h2>
+                                    <h2 class="h1"> <?php echo $article[2]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[2]["libChapoArt"] ?></p>
-                                    <div class="content"> <a class="read-more-btn" href="article.html">Lire en
-                                            entier</a>
+                                    <div class="content"> <a class="read-more-btn"
+                                            href="/views/frontend/articles/article.php?id=<?php echo $article[2]['numArt']; ?>">Lire
+                                            en entier</a>
                                     </div>
                                 </div>
                             </article>
@@ -103,7 +95,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[3]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes read</span>
+                                            <span class="text-uppercase">2 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[3]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -111,15 +103,12 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-0">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">cruises</a>
-                                            <a href="#!">news</a>
-                                        </li>
                                     </ul>
-                                    <h2><a class="post-title" href="article.html">
-                                            <?php echo $article[3]["libTitrArt"] ?></a></h2>
+                                    <h2 class="h1"> <?php echo $article[3]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[3]["libChapoArt"] ?></p>
-                                    <div class="content"> <a class="read-more-btn" href="article.html">Lire en
-                                            entier</a>
+                                    <div class="content"> <a class="read-more-btn"
+                                            href="/views/frontend/articles/article.php?id=<?php echo $article[3]['numArt']; ?>">Lire
+                                            en entier</a>
                                     </div>
                                 </div>
                             </article>
@@ -130,7 +119,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[4]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes read</span>
+                                            <span class="text-uppercase">3 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[4]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -138,15 +127,13 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-0">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">cruises</a>
-                                            <a href="#!">news</a>
-                                        </li>
+                                        <li> <a href="#!">
                                     </ul>
-                                    <h2 class="h1"><a class="post-title" href="article.html">
-                                            <?php echo $article[4]["libTitrArt"] ?></h2>
+                                    <h2 class="h1"> <?php echo $article[4]["libTitrArt"] ?></h2>
                                     <p class="card-text"><?php echo $article[4]["libChapoArt"] ?></p>
-                                    <div class="content"> <a class="read-more-btn" href="article.html">Lire en
-                                            entier</a>
+                                    <div class="content"> <a class="read-more-btn"
+                                            href="/views/frontend/articles/article.php?id=<?php echo $article[4]['numArt']; ?>">Lire
+                                            en entier</a>
                                     </div>
                                 </div>
                             </article>
@@ -157,7 +144,7 @@ $article = sql_select("article", "*");
                                     <div class="card-image">
                                         <div class="post-info"> <span
                                                 class="text-uppercase"><?php echo $article[5]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">3 minutes read</span>
+                                            <span class="text-uppercase">3 minutes de lecture</span>
                                         </div>
                                         <img src="<?php echo 'src/uploads/' . $article[5]['urlPhotArt'] ?>"
                                             alt="Post Thumbnail" class="w-100">
@@ -165,44 +152,16 @@ $article = sql_select("article", "*");
                                 </a>
                                 <div class="card-body px-0 pb-0">
                                     <ul class="post-meta mb-2">
-                                        <li> <a href="#!">destination</a>
-                                        </li>
                                     </ul>
                                     <h2 class="h1"><a class="post-title" href="article.html">
                                             <?php echo $article[5]["libTitrArt"] ?></a></h2>
                                     <p class="card-text"><?php echo $article[5]["libChapoArt"] ?></p>
-                                    <div class="content"> <a class="read-more-btn" href="article.html">Lire en
-                                            entier</a>
+                                    <div class="content"> <a class="read-more-btn"
+                                            href="/views/frontend/articles/article.php?id=<?php echo $article[5]['numArt']; ?>">Lire
+                                            en entier</a>
                                     </div>
                                 </div>
-                            </article>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <article class="card article-card article-card-sm h-100">
-                                <a href="article.html">
-                                    <div class="card-image">
-                                        <div class="post-info"> <span
-                                                class="text-uppercase"><?php echo $article[6]["dtCreaArt"] ?></span>
-                                            <span class="text-uppercase">2 minutes read</span>
-                                        </div>
-                                        <img src="<?php echo 'src/uploads/' . $article[6]['urlPhotArt'] ?>"
-                                            alt="Post Thumbnail" class="w-100">
-                                    </div>
-                                </a>
-                                <div class="card-body px-0 pb-0">
-                                    <ul class="post-meta mb-2">
-                                        <li> <a href="#!">news</a>
-                                            <a href="#!">tips</a>
-                                        </li>
-                                    </ul>
-                                    <h2 class="h1"><a class="post-title" href="article.html">
-                                            <?php echo $article[6]["libTitrArt"] ?></a></h2>
-                                    <p class="card-text"><?php echo $article[6]["libChapoArt"] ?></p>
-                                    <div class="content"> <a class="read-more-btn" href="article.html">Lire en
-                                            entier</a>
-                                    </div>
-                                </div>
-                            </article>
+
                         </div>
                         <div class="col-12">
                             <div class="row">
@@ -245,7 +204,7 @@ $article = sql_select("article", "*");
                         </div>
                     </div>
                 </div>
-                <?php include('sidebar.htm') ?>
+                <?php include('reporter-bootstrap-main/source/partials/sidebar.php') ?>
             </div>
         </div>
     </section>
