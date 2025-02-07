@@ -30,3 +30,5 @@ MDP Admin : Yayata33310!
 Tout ce qu'on a réalisé :
 crud :
 Statut ,membre , article ,membre ,thematique, commentaire qui ne fonctionne pas , likes qui s'affichent mais on ne peut pas liker. et mot clé.
+
+le site heberger ne fonctionne pas , il y a un problème avec l’hebergeur , a voir avec Gwendal
