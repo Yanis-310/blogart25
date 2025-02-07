@@ -1,51 +1,57 @@
-view like create:
 <?php
 include '../../../header.php';
 
-// Récupérer les articles et membres
-$articles = sql_select("ARTICLE", ""); // Récupère tous les articles
-$members = sql_select("MEMBRE", "");   // Récupère tous les membres
+
+$articles = sql_select("ARTICLE", "*");
+$membres = sql_select("MEMBRE", "*");
+
 
 ?>
 
+
+<!-- Bootstrap form to create a new statut -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Ajouter un Like</h1>
+            <h1>Nouveau like</h1>
         </div>
-
         <div class="col-md-12">
-            <form action="save_like.php" method="POST">
+            <form action="<?php echo ROOT_URL . '/api/likes/create.php' ?>" method="post">
                 <div class="form-group">
-                    <label for="numMemb">Sélectionner un Membre</label>
-                    <select id="numMemb" name="numMemb" class="form-control" required>
-                        <option value="">--- Choisissez un membre ---</option>
-                        <?php foreach ($members as $member): ?>
-                            <option value="<?php echo $member['numMemb']; ?>">
-                                <?php echo htmlspecialchars($member['pseudoMemb']); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="numArt">Sélectionner un Article</label>
-                    <select id="numArt" name="numArt" class="form-control" required>
-                        <option value="">--- Choisissez un article ---</option>
+                    <label for="numArt">Titre de l'article</label>
+                    <select class="form-select" name="numArt">
                         <?php foreach ($articles as $article): ?>
                             <option value="<?php echo $article['numArt']; ?>">
-                                <?php echo htmlspecialchars($article['libTitrArt']); ?>
+                                <?php echo $article['libTitrArt']; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
-
-                <button type="submit" class="btn btn-success">Ajouter un Like</button>
+                <br>
+                <div class="form-group">
+                    <label for="numMemb">Pseudo</label>
+                    <select class="form-select" name="numMemb">
+                        <?php foreach ($membres as $membre): ?>
+                            <option value="<?php echo $membre['numMemb']; ?>">
+                                <?php echo $membre['pseudoMemb']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <h3>Type de like</h3>
+                    <input type="radio" id="like" name="choixLike" value="1" checked>
+                    <label for="oui">Like</label><br>
+                    <input type="radio" id="unlike" name="choixLike" value="0">
+                    <label for="non">Unlike</label><br>
+                    </input>
+                </div>
+                <br />
+                <div class="form-group mt-2">
+                    <button type="submit" class="btn btn-primary">Confirmer le like ?</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-<?php
-include '../../../footer.php';
-?>

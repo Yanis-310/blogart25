@@ -12,7 +12,6 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
   <link rel="shortcut icon" type="image/x-icon" href="src/images/article.png" />
 
-
   <!-- theme meta -->
   <meta name="theme-name" content="reporter" />
 
@@ -26,28 +25,31 @@
   <!-- # CSS Plugins -->
   <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
   <link href="src/css/style.css" rel="stylesheet">
-
-
-
-
 </head>
+
 <?php
-//load config
+// Load config
 require_once 'config.php';
 ?>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container-fluid">
-      <li class="nav-item">
-        <a class="logo" href="#"><img src="<?php echo ROOT_URL ?>/src/images/logoBlogArt.png"></a>
-      </li>
+      <!-- Logo à gauche -->
+      <a class="navbar-brand" href="#">
+        <img src="<?php echo ROOT_URL ?>/src/images/logoBlogArt.png" alt="Logo Blog'Art" style="max-height: 60px;">
+      </a>
+
+      <!-- Bouton toggle pour les petits écrans -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <!-- Menu de navigation -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
@@ -56,13 +58,20 @@ require_once 'config.php';
           </li>
         </ul>
       </div>
-      <!--right align-->
-      <div class="d-flex">
-        <form class="d-flex" role="search">
+
+      <!-- Recherche et boutons de login/signup -->
+      <div class="d-flex align-items-center">
+        <form class="d-flex me-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Rechercher sur le site…" aria-label="Search">
         </form>
-        <a class="btn btn-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
-        <a class="btn btn-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
+        <a class="btn btn-outline-primary m-1" href="/views/backend/security/login.php" role="button">Login</a>
+        <a class="btn btn-outline-dark m-1" href="/views/backend/security/signup.php" role="button">Sign up</a>
       </div>
     </div>
   </nav>
+
+  <!-- Bootstrap JS (optionnel) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

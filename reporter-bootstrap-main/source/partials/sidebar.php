@@ -10,7 +10,7 @@
                         <h2 class="widget-title my-3">KHYM Studio</h2>
                         <p class="mb-3 pb-2">Plongez au cœur du rap bordelais avec 33BPM ! Interviews, reportages et
                             découvertes d’artistes : Khym Studio décrypte la scène locale et ses tendances</p> <a
-                            href="about.html" class="btn btn-sm btn-outline-primary">En savoir plus</a>
+                            href="about.php" class="btn btn-sm btn-outline-primary">En savoir plus</a>
                     </div>
                 </div>
             </div>
@@ -38,8 +38,8 @@
                                 </div>
                             </article>
                             <a class="media align-items-center" href="article.html">
-                                <img loading="lazy" decoding="async" src="images/post/post-2.jpg" alt="Post Thumbnail"
-                                    class="w-100">
+                                <img loading="lazy" decoding="async" src="/reporter-bootstrap-main/source/images/1.jpg"
+                                    alt="Post Thumbnail" class="w-100">
                                 <div class="media-body ml-3">
                                     <h3 style="margin-top:-5px">These Are Making It Easier To Visit</h3>
                                     <p class="mb-0 small">Heading Here is example of hedings. You can use …</p>
@@ -53,7 +53,7 @@
                                 </div>
                             </a>
                             <a class="media align-items-center" href="article.html">
-                                <img loading="lazy" decoding="async" src="images/post/post-5.jpg" alt="Post Thumbnail"
+                                <img loading="lazy" decoding="async" src="/reporter-bootstrap-main/source/images/1.jpg"
                                     class="w-100">
                                 <div class="media-body ml-3">
                                     <h3 style="margin-top:-5px">Perfect For Fashion</h3>
@@ -61,7 +61,7 @@
                                 </div>
                             </a>
                             <a class="media align-items-center" href="article.html">
-                                <img loading="lazy" decoding="async" src="images/post/post-9.jpg" alt="Post Thumbnail"
+                                <img loading="lazy" decoding="async" src="/reporter-bootstrap-main/source/images/1.jpg"
                                     class="w-100">
                                 <div class="media-body ml-3">
                                     <h3 style="margin-top:-5px">Record Utra Smooth Video</h3>
